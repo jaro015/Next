@@ -2,15 +2,13 @@
 
 import { sleep } from '@/app/utils/sleep';
 import { redirect } from 'next/navigation';
+import { sql } from '@vercel/postgres';
 
-// DTO - Data Transfer Object
-const createTask = dto => fetch('http://localhost:3003/tasks', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dto)
-});
+// Dodawanie nowych zadan do bazy danych
+const createTask = dto => sql`
+    INSERT INTO tasks (title, due_date, completed)
+    VALUES (${dto.title}, ${dto.dueDate}, false)
+`;
 
 // formData to dane z naszego formularza
 // definicja akcji, ktora ma sie wykonac po stronie serwera w momencie zatwierdzenia formularza. Aby akcja zostala wykonana, ta funkcja musi byc przekazana do atrybutu `action` w danym formularzu
@@ -31,7 +29,7 @@ export const createTaskAction = async (prevState, formData) => {
     const title = formData.get('title');
     const dueDate = formData.get('dueDate');
 
-    await sleep(5_000, null)
+    // await sleep(5_000, null)
 
     // Obiekt w ktorym beda informacje o bledach w konkretnych polach
     const errors = {};

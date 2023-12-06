@@ -2,16 +2,13 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { sql } from '@vercel/postgres';
 
-const completeTask = taskId => fetch(`http://localhost:3003/tasks/${taskId}`, {
-    method: 'PATCH',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        completed: true
-    })
-})
+const completeTask = taskId => sql`
+    UPDATE tasks
+    SET completed = true
+    WHERE id = ${taskId}
+`;
 
 // akcja serwerowa, ktora ma ukonczyc zadanie 
 export const completeTaskAction = async formData => {

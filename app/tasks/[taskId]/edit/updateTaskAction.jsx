@@ -1,13 +1,13 @@
 'use server'
 
+import { sql } from '@vercel/postgres';
+
 // Funkcja modyfikujaca zadanie
-const updateTask = (taskId, dto) => fetch(`http://localhost:3003/tasks/${taskId}`, {
-    method: 'PATCH',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dto)
-})
+const updateTask = (taskId, dto) => sql`
+    UPDATE tasks
+    SET title = ${dto.title}, due_date = ${dto.dueDate}
+    WHERE id = ${taskId}
+`;
 
 export const updateTaskAction = async (taskId, prevState, formData) => {
     const title = formData.get('title');

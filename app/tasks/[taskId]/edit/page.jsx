@@ -1,13 +1,29 @@
 import { H1 } from "@/app/components/H1";
 import { UpdateTaskForm } from "./UpdateTaskForm";
 import { notFound } from "next/navigation";
+import { sql } from '@vercel/postgres';
 
 // Funkcjado pobrania danych konkretnego zadania
-const getTask = taskId => fetch(`http://localhost:3003/tasks/${taskId}`)
-    .then(res => {
-        if (res.status === 404) notFound();
+const getTask = taskId => sql`
+    SELECT * FROM tasks
+    WHERE id = ${taskId}
+`
+    .then(res => res.rows)
+    .then(tasks => {
+        // Jesli znaleziono takie zadanie, to zostanie zwrocona tablica z 1 elementem
+        // Jesli nie znaleziono, to pusta tablica
+        const [foundTask] = tasks;
 
-        return res.json();
+        if (!foundTask) notFound();
+
+        // Musimy zmapowac date z bazy danych na format YYYY-MM-DD
+        const dueDate = new Date(foundTask.due_date);
+
+        const year = dueDate.getFullYear();
+        const month = dueDate.getMonth() + 1;
+        const day = dueDate.getDate() > 9 ? dueDate.getDate() : `0${dueDate.getDate()}` ;
+
+        return { ...foundTask, dueDate: `${year}-${month}-${day}` };
     })
 
 // W next.js definiujemy dynamiczne parametry nazywajac katalog z wykorzystaniem nawiasow kwadratowych: [taskId] <- bedziemy mieli parametr dynamiczny taskId

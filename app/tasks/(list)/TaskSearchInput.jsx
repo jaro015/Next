@@ -1,6 +1,7 @@
 'use client'
 
-import { useSearchParams, usePathname, useRouter } from 'next/navigation'; 
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 // Biblioteka do debounce
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -11,6 +12,12 @@ export const TaskSearchInput = () => {
     const pathname = usePathname();
     // Pobieramy router, ktory pozowli nam zmienic adres w pasku przegladarki
     const router = useRouter();
+
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        if(inputRef.current) inputRef.current.focus();
+    }, [])
 
     // Opozniamy wywolanie funkcji o 300ms
     const handleSearch = useDebouncedCallback(e => {
@@ -29,6 +36,7 @@ export const TaskSearchInput = () => {
 
     return (
         <input
+            ref={inputRef}
             type="search"
             placeholder="Znajdz zadanie"
             className="border border-gray-400 p-4 my-4 w-full"
