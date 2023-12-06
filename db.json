@@ -1,0 +1,82 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Kupic mleko",
+      "dueDate": "2023-12-05",
+      "completed": true
+    },
+    {
+      "id": 2,
+      "title": "Kupic jajka",
+      "dueDate": "2023-12-06",
+      "completed": true
+    },
+    {
+      "title": "Kupic chleb",
+      "dueDate": "2023-12-07",
+      "id": 3,
+      "completed": true
+    },
+    {
+      "title": "Kupic czekolade",
+      "dueDate": "2023-12-05",
+      "id": 4,
+      "completed": true
+    },
+    {
+      "title": "Kupic kawe",
+      "dueDate": "2023-12-06",
+      "id": 5,
+      "completed": true
+    },
+    {
+      "title": "Nowe zadanie",
+      "dueDate": "2023-12-05",
+      "id": 6,
+      "completed": true
+    },
+    {
+      "title": "Test 2",
+      "dueDate": "2023-12-06",
+      "id": 7,
+      "completed": true
+    },
+    {
+      "title": "",
+      "dueDate": "",
+      "id": 8,
+      "completed": false
+    },
+    {
+      "title": "Kupic prezenty",
+      "dueDate": "2023-12-06",
+      "id": 9,
+      "completed": false
+    },
+    {
+      "title": "Test modyfikacja kolejna",
+      "dueDate": "2023-12-06",
+      "id": 10,
+      "completed": false
+    },
+    {
+      "title": "test",
+      "dueDate": "2023-12-07",
+      "id": 11,
+      "completed": false
+    },
+    {
+      "title": "Najnowsze zadanie",
+      "dueDate": "2023-12-06",
+      "id": 12,
+      "completed": false
+    },
+    {
+      "title": "Naprawic buga",
+      "dueDate": "2023-12-06",
+      "completed": false,
+      "id": 13
+    }
+  ]
+}
